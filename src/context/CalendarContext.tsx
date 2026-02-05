@@ -86,7 +86,7 @@ export function CalendarProvider({ children }: { children: ReactNode }) {
             // Hydrate entries with Food details and Slot details
             const hydratedEntries: CalendarEntryWithFood[] = (entriesData as any[] || []).map(entry => {
                 const food = processedFoods.find(f => f.id === entry.food_id);
-                const slot = slotsData?.find(s => s.id === entry.meal_slot_id);
+                const slot = (slotsData as any[] | null)?.find(s => s.id === entry.meal_slot_id);
                 // Return even if food/slot missing (deleted?) - handle gracefully in UI
                 return {
                     ...entry,
