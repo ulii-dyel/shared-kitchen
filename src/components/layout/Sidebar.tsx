@@ -34,10 +34,10 @@ export default function Sidebar() {
 
         // Filter match
         if (activeFilter === 'mine') {
-            return food.favorites?.some(f => f.user_id === currentUser.id);
+            return food.favorites?.some(f => f.user_id === currentUser?.id);
         }
         if (activeFilter === 'others') {
-            return food.favorites?.some(f => f.user_id === partner.id);
+            return food.favorites?.some(f => f.user_id === partner?.id);
         }
         if (activeFilter === 'recents') {
             // Find foods used in the last 7 days
