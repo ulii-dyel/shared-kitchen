@@ -3,8 +3,9 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { DragEndEvent } from '@dnd-kit/core';
 import { addDays, differenceInCalendarDays, format } from 'date-fns';
-import { FoodWithDetails, CalendarEntryWithFood, MealSlot, Food, Tag, FoodIngredient } from '@/types/database';
+import { FoodWithDetails, CalendarEntryWithFood, MealSlot, Food, Tag, FoodIngredient, Database } from '@/types/database';
 import { createClient } from '@/lib/supabase/client';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { useUser } from './UserContext';
 
 interface CalendarContextType {
@@ -33,7 +34,7 @@ export function CalendarProvider({ children }: { children: ReactNode }) {
     const [entries, setEntries] = useState<CalendarEntryWithFood[]>([]);
     const [slots, setSlots] = useState<MealSlot[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const supabase = createClient();
+    const supabase = createClient() as SupabaseClient<Database>;
 
     const fetchAllData = async () => {
         if (!currentUser?.household_id) return;
