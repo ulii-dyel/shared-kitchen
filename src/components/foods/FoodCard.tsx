@@ -25,19 +25,19 @@ export default function FoodCard({
     const { currentUser, partner } = useUser();
 
     // Determine favorite state
-    const isMyFav = food.favorites?.some(f => f.user_id === currentUser.id);
-    const isPartnerFav = food.favorites?.some(f => f.user_id === partner.id);
+    const isMyFav = food.favorites?.some(f => f.user_id === currentUser?.id);
+    const isPartnerFav = food.favorites?.some(f => f.user_id === partner?.id);
     const isMutual = isMyFav && isPartnerFav;
 
     const favColor = isMutual ? 'text-purple-500 fill-purple-500' :
-        isMyFav ? `text-[${currentUser.color}] fill-[${currentUser.color}]` :
-            isPartnerFav ? `text-[${partner.color}] fill-[${partner.color}]` :
+        isMyFav ? `text-[${currentUser?.color}] fill-[${currentUser?.color}]` :
+            isPartnerFav ? `text-[${partner?.color}] fill-[${partner?.color}]` :
                 'text-[var(--text-muted)] group-hover:text-[var(--primary)]';
 
     // Inline style for dynamic colors if using hex
     const heartStyle = isMutual ? { color: '#a855f7', fill: '#a855f7' } :
-        isMyFav ? { color: currentUser.color, fill: currentUser.color } :
-            isPartnerFav ? { color: partner.color, fill: partner.color } : undefined;
+        isMyFav && currentUser ? { color: currentUser.color, fill: currentUser.color } :
+            isPartnerFav && partner ? { color: partner.color, fill: partner.color } : undefined;
 
     return (
         <Card
