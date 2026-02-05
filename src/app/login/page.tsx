@@ -20,7 +20,7 @@ export default function LoginPage() {
 
         try {
             const action = isLogin ? login : signup;
-            const result = await action(formData);
+            const result = await action(formData) as { error?: string; message?: string } | undefined;
 
             if (result?.error) {
                 setMessage({ text: result.error, type: 'error' });
